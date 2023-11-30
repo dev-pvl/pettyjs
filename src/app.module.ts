@@ -3,8 +3,6 @@ import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { DogsController } from './dogs/dogs.controller';
-import { CatsModule } from './cats/cats.module';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
@@ -24,11 +22,10 @@ import ORMConfig from 'ormconfig';
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({ ...ORMConfig() }),
-    CatsModule,
     UsersModule,
     AuthModule,
   ],
-  controllers: [AppController, DogsController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {
