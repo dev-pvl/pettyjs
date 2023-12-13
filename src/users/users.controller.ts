@@ -11,10 +11,14 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Public } from '../auth/auth.decorator';
+import { UserRepository } from './entities/user.repository';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly userRepository: UserRepository,
+  ) {}
 
   @Post()
   @Public()
@@ -25,17 +29,12 @@ export class UsersController {
 
   @Get()
   findAll() {
-    return this.usersService.findAll();
+    return this.userRepository.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
-  }
-
-  @Get(':email')
-  findOneByEmail(@Param('email') email: string) {
-    return this.usersService.findOneByEmail(email);
+    return this.userRepository.findOneByID(+id);
   }
 
   @Patch(':id')
