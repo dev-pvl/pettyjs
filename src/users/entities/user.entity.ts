@@ -1,7 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, Unique } from 'typeorm';
 import { IsEmail } from 'class-validator';
+import { Exclude } from 'class-transformer';
 
-@Entity()
+@Entity() // { name: 'UserEntity' }
 @Unique(['email'])
 export class User {
   @PrimaryGeneratedColumn()
@@ -12,7 +13,11 @@ export class User {
   email: string;
 
   @Column()
+  @Exclude()
   password: string;
+
+  @Exclude()
+  currentHashedRefreshToken?: string;
 
   @Column()
   firstName: string;
@@ -22,4 +27,8 @@ export class User {
 
   @Column({ type: 'boolean', default: true })
   isActive: boolean;
+
+  // @OneToOne(() => RefreshToken, { cascade: true })
+  // @JoinColumn()
+  // refreshToken: RefreshToken;
 }

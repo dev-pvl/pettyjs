@@ -22,6 +22,12 @@ export class AuthController {
     return this.authService.signIn(signInDto.email, signInDto.password);
   }
 
+  @Post('refresh')
+  @Public()
+  refreshTokens(@Body('refreshToken') refreshToken: string) {
+    return this.authService.refreshTokens(refreshToken);
+  }
+
   @Get('profile')
   getProfile(@Request() req) {
     return req.user;

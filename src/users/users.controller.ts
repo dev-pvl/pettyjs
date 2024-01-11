@@ -34,7 +34,7 @@ export class UsersController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.userRepository.findOneByID(+id);
+    return this.userRepository.findOneById(+id);
   }
 
   @Patch(':id')

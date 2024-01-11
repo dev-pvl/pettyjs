@@ -1,3 +1,4 @@
+import { Transform } from 'class-transformer';
 import {
   IsEmail,
   IsNotEmpty,
@@ -23,5 +24,6 @@ export class CreateUserDto {
   lastName: string;
 
   // @IsBoolean()
+  @Transform((value) => Number(value))
   isActive: boolean;
 }

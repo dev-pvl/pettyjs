@@ -5,6 +5,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthGuard } from './auth.guard';
 import { APP_GUARD } from '@nestjs/core';
 import { UserRepository } from 'src/users/entities/user.repository';
+import { RefreshTokenRepository } from './entities/refresh-token.repository';
 
 @Module({
   imports: [
@@ -12,7 +13,7 @@ import { UserRepository } from 'src/users/entities/user.repository';
       useFactory: () => ({
         global: true,
         secret: process.env.JWT_SECRET,
-        signOptions: { expiresIn: '360s' },
+        signOptions: { expiresIn: process.env.JWT_EXPIRATION_TIME },
       }),
     }),
   ],
@@ -24,6 +25,7 @@ import { UserRepository } from 'src/users/entities/user.repository';
     },
     AuthService,
     UserRepository,
+    RefreshTokenRepository,
   ],
   exports: [AuthService],
 })
