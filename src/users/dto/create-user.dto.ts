@@ -8,19 +8,19 @@ import {
 } from 'class-validator';
 
 export class CreateUserDto {
-  @IsEmail({}, { message: 'Invalid email format' })
+  @IsEmail({})
   email: string;
 
   @IsString()
-  @MinLength(6, { message: 'Password must be at least 6 characters long' })
+  @MinLength(6)
   password: string;
 
   @IsString()
-  @IsNotEmpty({ message: 'First name is required' })
+  @IsNotEmpty()
   firstName: string;
 
   @IsString()
-  @IsNotEmpty({ message: 'Last name is required' })
+  @IsNotEmpty()
   lastName: string;
 
   // @IsBoolean()

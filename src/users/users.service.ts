@@ -34,4 +34,12 @@ export class UsersService {
   async remove(id: number): Promise<void> {
     await this.usersRepository.delete(id);
   }
+
+  async findAll(): Promise<User[]> {
+    return this.usersRepository.findAll();
+  }
+
+  async findOneById(id: number): Promise<User | null> {
+    return this.usersRepository.findOneById(+id);
+  }
 }
