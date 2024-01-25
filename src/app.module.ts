@@ -17,6 +17,10 @@ import ORMConfig from 'ormconfig';
           .valid('development', 'production', 'test', 'provision')
           .default('development'),
         PORT: Joi.number().default(3000),
+        JWT_SECRET: Joi.string().required(),
+        JWT_EXPIRATION_TIME: Joi.string().required(),
+        JWT_REFRESH_TOKEN_SECRET: Joi.string().required(),
+        JWT_REFRESH_TOKEN_EXPIRATION_TIME: Joi.string().required(),
       }),
       load: [ORMConfig],
       isGlobal: true,

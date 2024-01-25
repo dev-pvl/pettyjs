@@ -1,4 +1,5 @@
 import { User } from 'src/users/entities/user.entity';
+import { RefreshToken } from 'src/auth/entities/refresh-token.entity';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 // const ORMConfig: TypeOrmModuleOptions = {
@@ -14,13 +15,24 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 // export default ORMConfig;
 
+// export default (): TypeOrmModuleOptions => ({
+//   type: 'mysql',
+//   host: 'localhost',
+//   port: 3306,
+//   username: process.env.DATABASE_USER,
+//   password: process.env.DATABASE_PASSWORD,
+//   database: 'pettyjs',
+//   entities: [User],
+//   synchronize: true, // process.env.NODE_ENV !== 'production'
+// });
+
 export default (): TypeOrmModuleOptions => ({
-  type: 'mysql',
-  host: 'localhost',
-  port: 3306,
+  type: 'postgres',
+  host: process.env.DATABASE_HOST,
+  port: Number(process.env.DATABASE_PORT),
   username: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
-  database: 'pettyjs',
-  entities: [User],
+  database: 'petty',
+  entities: [User, RefreshToken],
   synchronize: true, // process.env.NODE_ENV !== 'production'
 });
